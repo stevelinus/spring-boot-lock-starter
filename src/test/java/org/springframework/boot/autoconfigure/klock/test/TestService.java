@@ -10,23 +10,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class TestService {
 
-    @Klock(waitTime = 10,leaseTime = 60,keys = {"#param"})
+    @Klock(waitTime = 10, leaseTime = 60, keys = {"#param"})
     public String getValue(String param) throws Exception {
-      //  if ("sleep".equals(param)) {//线程休眠或者断点阻塞，达到一直占用锁的测试效果
-            Thread.sleep(1000*3);
+        //  if ("sleep".equals(param)) {//线程休眠或者断点阻塞，达到一直占用锁的测试效果
+        Thread.sleep(1000);
         //}
         return "success";
     }
 
     @Klock(keys = {"#userId"})
-    public String getValue(String userId,@KlockKey int id)throws Exception{
-        Thread.sleep(60*1000);
+    public String getValue(String userId, @KlockKey int id) throws Exception {
+        Thread.sleep(1000);
         return "success";
     }
 
-    @Klock(keys = {"#user.name","#user.id"})
-    public String getValue(User user)throws Exception{
-        Thread.sleep(60*1000);
+    @Klock(keys = {"#user.name", "#user.id"})
+    public String getValue(User user) throws Exception {
+        Thread.sleep(1000);
         return "success";
     }
 
