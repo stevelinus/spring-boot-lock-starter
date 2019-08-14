@@ -8,19 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.klock.annotation.Klock;
 import org.springframework.boot.autoconfigure.klock.core.LockInfoProvider;
 import org.springframework.boot.autoconfigure.klock.model.LockInfo;
-import org.springframework.boot.autoconfigure.klock.model.LockType;
-
-import javax.annotation.PostConstruct;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by kl on 2017/12/29.
  * Content :
  */
-public class LockFactory  {
-    Logger logger= LoggerFactory.getLogger(getClass());
+public class LockFactory {
+
+    Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private RedissonClient redissonClient;
@@ -28,8 +23,8 @@ public class LockFactory  {
     @Autowired
     private LockInfoProvider lockInfoProvider;
 
-    public Lock getLock(ProceedingJoinPoint joinPoint, Klock klock){
-        LockInfo lockInfo = lockInfoProvider.get(joinPoint,klock);
+    public Lock getLock(ProceedingJoinPoint joinPoint, Klock klock) {
+        LockInfo lockInfo = lockInfoProvider.get(joinPoint, klock);
         switch (lockInfo.getType()) {
             case Reentrant:
                 return new ReentrantLock(redissonClient, lockInfo);

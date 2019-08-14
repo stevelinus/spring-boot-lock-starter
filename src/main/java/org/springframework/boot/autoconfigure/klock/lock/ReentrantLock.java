@@ -17,10 +17,11 @@ public class ReentrantLock implements Lock {
 
     private RedissonClient redissonClient;
 
-    public ReentrantLock(RedissonClient redissonClient,LockInfo lockInfo) {
+    public ReentrantLock(RedissonClient redissonClient, LockInfo lockInfo) {
         this.redissonClient = redissonClient;
         this.lockInfo = lockInfo;
     }
+
     @Override
     public boolean acquire() {
         try {
@@ -33,12 +34,13 @@ public class ReentrantLock implements Lock {
 
     @Override
     public void release() {
-        if(rLock.isHeldByCurrentThread()){
+        if (rLock.isHeldByCurrentThread()) {
             rLock.unlockAsync();
         }
+    }
 
+    public String getKey() {
+        return lockInfo.getName();
     }
-    public String getKey(){
-        return this.lockInfo.getName();
-    }
+
 }

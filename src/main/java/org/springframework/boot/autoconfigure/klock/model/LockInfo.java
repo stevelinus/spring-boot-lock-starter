@@ -52,4 +52,5 @@ public class LockInfo {
     public void setType(LockType type) {
         this.type = type;
     }
+
 }

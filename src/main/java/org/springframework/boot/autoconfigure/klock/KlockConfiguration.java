@@ -16,22 +16,25 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @Import({KlockAspectHandler.class})
 public class KlockConfiguration {
+
     @Bean
-    public LockInfoProvider lockInfoProvider(){
+    public LockInfoProvider lockInfoProvider() {
         return new LockInfoProvider();
     }
 
     @Bean
-    public BusinessKeyProvider businessKeyProvider(){
+    public BusinessKeyProvider businessKeyProvider() {
         return new BusinessKeyProvider();
     }
 
     @Bean
-    public LockFactory lockFactory(){
+    public LockFactory lockFactory() {
         return new LockFactory();
     }
+
     @Bean
-    public KlockConfig klockConfig(){
+    public KlockConfig klockConfig() {
         return new KlockConfig();
     }
+
 }

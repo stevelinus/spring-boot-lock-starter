@@ -33,36 +33,37 @@ public class KlockAutoConfiguration {
     @Autowired
     private KlockConfig klockConfig;
 
+    //仅仅在当前上下文中不存在某个对象时，才会实例化一个Bean，如果name为“example”的bean存在代码块不执行。
     @Bean(destroyMethod = "shutdown") //bean 销毁时不调用shutdown
-    @ConditionalOnMissingBean //仅仅在当前上下文中不存在某个对象时，才会实例化一个Bean，@ConditionOnMissingBean(name = "example")，这个表示如果name为“example”的bean存在，这该注解修饰的代码块不执行。
+    @ConditionalOnMissingBean
     RedissonClient redisson() throws Exception {
         Config config = new Config();
-        if(klockConfig.getClusterServer()!=null){
+        if (klockConfig.getClusterServer() != null) {
             config.useClusterServers().setPassword(klockConfig.getPassword())
                     .addNodeAddress(klockConfig.getClusterServer().getNodeAddresses());
-        }else {
+        } else {
             config.useSingleServer().setAddress(klockConfig.getAddress())
                     .setDatabase(klockConfig.getDatabase())
                     .setPassword(klockConfig.getPassword());
         }
-        Codec codec=(Codec) ClassUtils.forName(klockConfig.getCodec(),ClassUtils.getDefaultClassLoader()).newInstance();
+        Codec codec = (Codec) ClassUtils.forName(klockConfig.getCodec(), ClassUtils.getDefaultClassLoader()).newInstance();
         config.setCodec(codec);
         config.setEventLoopGroup(new NioEventLoopGroup());
         return Redisson.create(config);
     }
 
     @Bean
-    public LockInfoProvider lockInfoProvider(){
+    public LockInfoProvider lockInfoProvider() {
         return new LockInfoProvider();
     }
 
     @Bean
-    public BusinessKeyProvider businessKeyProvider(){
+    public BusinessKeyProvider businessKeyProvider() {
         return new BusinessKeyProvider();
     }
 
     @Bean
-    public LockFactory lockFactory(){
+    public LockFactory lockFactory() {
         return new LockFactory();
     }
 }

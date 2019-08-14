@@ -12,9 +12,9 @@ public class KlockConfig {
     //redisson
     private String address;
     private String password;
-    private int database=15;
+    private int database = 15;
     private ClusterServer clusterServer;
-    private String codec = "org.redisson.codec.JsonJacksonCodec";
+    private String codec = "org.redisson.codec.JsonJacksonCodec"; // 默认值也是这个
     //lock
     private long waitTime = 60;
     private long leaseTime = 60;
@@ -75,7 +75,7 @@ public class KlockConfig {
         this.clusterServer = clusterServer;
     }
 
-    public static class ClusterServer{
+    public static class ClusterServer {
 
         private String[] nodeAddresses;
 
@@ -86,5 +86,7 @@ public class KlockConfig {
         public void setNodeAddresses(String[] nodeAddresses) {
             this.nodeAddresses = nodeAddresses;
         }
+
     }
+
 }
