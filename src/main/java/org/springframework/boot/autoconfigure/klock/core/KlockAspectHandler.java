@@ -1,6 +1,7 @@
 package org.springframework.boot.autoconfigure.klock.core;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,12 @@ public class KlockAspectHandler {
 
     @Around(value = "@annotation(klock)")
     public Object around(ProceedingJoinPoint joinPoint, Klock klock) throws Throwable {
+
+        Signature signature = joinPoint.getSignature();
+        Object[] args = joinPoint.getArgs();
+        Object target = joinPoint.getTarget();
+        Object pointThis = joinPoint.getThis();
+
         Lock lock = lockFactory.getLock(joinPoint, klock);
         boolean currentThreadLock = false;
         try {
