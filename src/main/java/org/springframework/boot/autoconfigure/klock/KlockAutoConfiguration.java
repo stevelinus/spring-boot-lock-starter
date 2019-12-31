@@ -34,7 +34,7 @@ public class KlockAutoConfiguration {
     private KlockConfig klockConfig;
 
     //仅仅在当前上下文中不存在某个对象时，才会实例化一个Bean，如果name为“example”的bean存在代码块不执行。
-    @Bean(destroyMethod = "shutdown") //bean 销毁时不调用shutdown
+    @Bean //bean 销毁时不调用shutdown
     @ConditionalOnMissingBean
     RedissonClient redisson() throws Exception {
         Config config = new Config();

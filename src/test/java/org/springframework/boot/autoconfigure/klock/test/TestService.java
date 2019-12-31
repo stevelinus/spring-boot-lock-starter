@@ -18,7 +18,7 @@ public class TestService {
         return "success";
     }
 
-    @Klock(keys = {"#userId"})
+    @Klock(keys = {"#userId"}, waitTime = 1000, leaseTime = 1000)
     public String getValue(String userId, @KlockKey int id) throws Exception {
         Thread.sleep(1000);
         return "success";
