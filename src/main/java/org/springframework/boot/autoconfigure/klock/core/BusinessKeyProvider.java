@@ -43,8 +43,7 @@ public class BusinessKeyProvider {
         Method method = signature.getMethod();
         if (method.getDeclaringClass().isInterface()) {
             try {
-                method = joinPoint.getTarget().getClass().getDeclaredMethod(signature.getName(),
-                        method.getParameterTypes());
+                method = joinPoint.getTarget().getClass().getDeclaredMethod(signature.getName(), method.getParameterTypes());
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -18,7 +18,6 @@ public class LockInfoProvider {
 
     @Autowired
     private KlockConfig klockConfig;
-
     @Autowired
     private BusinessKeyProvider businessKeyProvider;
 
