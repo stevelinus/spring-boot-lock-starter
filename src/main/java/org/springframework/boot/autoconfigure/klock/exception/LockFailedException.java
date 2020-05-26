@@ -5,7 +5,7 @@ package org.springframework.boot.autoconfigure.klock.exception;
  * <p>
  * 加锁失败和没有拿到锁, 就会抛出这个异常。这个异常必须处理
  */
-public class LockFailedException extends Exception {
+public class LockFailedException extends RuntimeException {
 
     private static final long serialVersionUID = 7160531484988272093L;
 
